@@ -14,15 +14,15 @@ yargs.command({
         }
     },
     handler: (argv) => {
-        geocode(argv.place, (error, data) => {
+        geocode(argv.place, (error, { lat, lon, location } = {}) => {
             if (error) {
                 return console.log(error);
             }
-            getWeather(data.lat, data.lon, (error, forecastData) => {
+            getWeather(lat, lon, (error, forecastData) => {
                 if (error) {
                     console.log('Error', error);
                 }
-                console.log(data.location);
+                console.log(location);
                 console.log(forecastData);
             })
         })
